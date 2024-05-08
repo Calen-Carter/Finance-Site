@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Manager</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-color: #f4f4f4;
+        }
+        .content {
+            flex: 1; /* Allows the content area to expand to fill available space, pushing the footer down */
+            padding: 20px;
+            text-align: center;
+            background-color: rgb(0, 0, 0);
+            background-image: url("https://img.freepik.com/free-vector/graph-chart-with-moving-up-arrow-stock-market-financial-investment-diagram-blue-background_56104-1814.jpg?size=626&ext=jpg&ga=GA1.1.867424154.1715126400&semt=ais");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .header, .footer {
+            background: #062c0e;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .nav {
+            background: rgb(0, 0, 0);
+            text-align: center;
+            padding: 10px 0;
+        }
+        .nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 10px;
+            font-size: 18px;
+        }
+        .footer {
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .top_left_img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Welcome to Finance Manager</h1>
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/007/264/787/small_2x/business-finance-logo-template-illustration-free-vector.jpg" class = "top_left_img"> </img>
+    </header>
+    <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/about">About</a>
+    </nav>
+    <div class="content">
+        <h1>Manage Your Finances with Ease</h1>
+        <p>Track your expenses, visualize your financial progress, and set budgets.</p>
+        <a href="/register.html">Get Started</a>
+    </div>
+    <footer class="footer">
+        <p>Finance Manager © 2024</p>
+    </footer>
+</body>
+</html>

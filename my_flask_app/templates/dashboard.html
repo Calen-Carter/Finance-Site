@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    /* Body styles */
+    body {
+    font-family: Arial, sans-serif; /* Sets the font family for the entire document */
+    background-color: lightgrey; /* Sets the background color of the body to light grey */
+    }
+
+    /* Container styles */
+    .container {
+    max-width: 1200px; /* Sets the maximum width of the container to 1200 pixels */
+    margin: auto; /* Centers the container horizontally */
+    padding: 20px; /* Adds padding to the container */
+    }
+
+    /* Header styles */
+    .header {
+    background-color: #333; /* Sets the background color of the header to dark gray */
+    color: #fff; /* Sets the text color of the header to white */
+    padding: 20px; /* Adds padding to the header */
+    text-align: center; /* Centers the text horizontally within the header */
+    }
+
+    /* Title styles */
+    .title {
+    font-size: 24px; /* Sets the font size of the title */
+    }
+
+    /* Content styles */
+    .content {
+    display: flex; /* Displays the content in a flex layout */
+    justify-content: space-between; /* Aligns items evenly along the main axis with space between them */
+    margin-top: 20px; /* Adds margin to the top of the content */
+    }
+
+    /* Column styles */
+    .expenses-column,
+    .calculation-column,
+    .expense-details {
+    background-color: #fff; /* Sets the background color of the columns to white */
+    padding: 20px; /* Adds padding to the columns */
+    border-radius: 10px; /* Sets the border radius of the columns */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a box shadow to the columns */
+    margin-bottom: 20px; /* Adds margin to the bottom of the columns */
+    }
+
+    /* Expenses column styles */
+    .expenses-column {
+    flex: 0 0 30%; /* Sets the flex properties of the expenses column */
+    }
+
+    /* Calculation column styles */
+    .calculation-column {
+    flex: 0 0 30%; /* Sets the flex properties of the calculation column */
+    }
+
+    /* Expense details styles */
+    .expense-details {
+    flex: 0 0 40%; /* Sets the flex properties of the expense details column */
+    }
+
+    /* Expense list styles */
+    .expense-list {
+    list-style: none; /* Removes default list styles */
+    padding: 0; /* Removes padding from the expense list */
+    margin: 0; /* Removes margin from the expense list */
+    }
+
+    /* Expense item styles */
+    .expense-item {
+    padding: 10px; /* Adds padding to the expense items */
+    border-bottom: 1px solid #ccc; /* Adds a bottom border to separate expense items */
+    display: flex; /* Displays the expense items in a flex layout */
+    justify-content: space-between; /* Aligns items evenly along the main axis with space between them */
+    align-items: center; /* Aligns items vertically within the expense items */
+    }
+
+    /* Expense item button styles */
+    .expense-item button {
+    background-color: transparent; /* Sets the background color of the buttons to transparent */
+    border: none; /* Removes border from the buttons */
+    color: #007bff; /* Sets the text color of the buttons to blue */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    }
+
+    /* Expense item button hover styles */
+    .expense-item button:hover {
+    text-decoration: underline; /* Underlines the buttons on hover */
+    }
+
+    /* Expense details form styles */
+    .expense-details form {
+    display: flex; /* Displays the form in a flex layout */
+    flex-direction: column; /* Arranges form elements vertically */
+    }
+
+    /* Input field styles */
+    .input-field {
+    margin-bottom: 10px; /* Adds margin to the bottom of input fields */
+    padding: 10px; /* Adds padding to input fields */
+    border: 1px solid #000000; /* Adds a border to input fields */
+    border-radius: 5px; /* Sets the border radius of input fields */
+    font-size: 16px; /* Sets the font size of input fields */
+    }
+
+    /* Input field focus styles */
+    .input-field:focus {
+    outline: none; /* Removes the default focus outline */
+    border-color: #007bff; /* Changes the border color on focus to blue */
+    }
+
+    /* Button styles */
+    .button {
+    background-color: #2c5e1d; /* Sets the background color of buttons to blue */
+    color: #fff; /* Sets the text color of buttons to white */
+    border: none; /* Removes border from buttons */
+    padding: 10px 20px; /* Adds padding to buttons */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    border-radius: 5px; /* Sets the border radius of buttons */
+    font-size: 16px; /* Sets the font size of buttons */
+    }
+
+    /* Button hover styles */
+    .button:hover {
+    background-color: #0056b3; /* Darkens the background color of buttons on hover */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header section -->
+  <div class="header">
+    <h1 class="title">Finance Dashboard</h1> <!-- Title of the dashboard -->
+  </div>
+
+  <!-- Main content section -->
+  <div class="container">
+    <div class="content">
+      
+      <!-- Expenses column -->
+      <div class="expenses-column">
+        <h2>Expenses</h2> <!-- Title of the expenses section -->
+        <ul class="expense-list">
+          <!-- Loop through each expense -->
+          {% for expense in expenses %}
+          <li class="expense-item">
+            <!-- Display expense name and amount -->
+            <span>{{ expense.name }} - ${{ expense.amount }}</span>
+            <!-- Buttons for editing and removing expenses -->
+            <form action="/edit_expense/{{ expense.id }}" method="GET">
+              <button type="submit"><i class="fas fa-edit"></i> Edit</button>
+            </form>
+            <form action="/remove_expense/{{ expense.id }}" method="POST">
+              <button type="submit"><i class="fas fa-trash-alt"></i> Delete</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <!-- Calculation column -->
+      <div class="calculation-column">
+        <h2>Calculation</h2> <!-- Title of the calculation section -->
+        <!-- Dynamic calculation of total monthly, yearly, and overall expenses -->
+        <p>Total Monthly Expenses: ${{ total_monthly_expenses }}</p>
+        <p>Total Yearly Expenses: ${{ total_monthly_expenses * 12 }}</p>
+        <p>Total Expenses: ${{ total_expenses }}</p>
+      </div>
+      
+      <!-- Expense details section -->
+      <div class="expense-details">
+        <h2>Expense Details</h2> <!-- Title of the expense details section -->
+        <!-- Form for adding a new expense -->
+        <form action="/dashboard" method="POST">
+          <input type="text" class="input-field" name="name" placeholder="Expense Name" required> <!-- Input field for expense name -->
+          <input type="number" class="input-field" name="amount" placeholder="Expense Amount" required> <!-- Input field for expense amount -->
+          <textarea class="input-field" name="notes" placeholder="Notes"></textarea> <!-- Textarea for expense notes -->
+          <button type="submit" class="button">Save Expense</button> <!-- Button to save the expense -->
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
